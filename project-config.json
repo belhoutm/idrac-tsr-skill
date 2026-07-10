@@ -1,0 +1,108 @@
+{
+  "project_name": "iDRAC-TSR-Skill",
+  "version": "1.0.0",
+  "description": "Integrated Dell server management and analysis skills combining active iDRAC operations with specialized TSR log analysis",
+  "created": "2026-07-10",
+  "skills": [
+    {
+      "name": "idrac",
+      "version": "1.0.0",
+      "description": "Comprehensive iDRAC management and server operations",
+      "path": "idrac/",
+      "triggers": [
+        "@idrac",
+        "iDRAC",
+        "Dell server",
+        "TSR report",
+        "Technical Support Report",
+        "server management",
+        "power management",
+        "firmware update",
+        "racadm",
+        "Redfish",
+        "server inventory",
+        "hardware diagnostics"
+      ],
+      "capabilities": [
+        "Power management",
+        "System inventory",
+        "Firmware updates",
+        "Configuration management",
+        "Redfish API integration",
+        "racadm CLI support",
+        "SNMP monitoring",
+        "DAP blueprint integration"
+      ]
+    },
+    {
+      "name": "tsr-analysis",
+      "version": "1.0.0",
+      "description": "Specialized TSR log analysis and diagnostics",
+      "path": "tsr-analysis/",
+      "triggers": [
+        "@tsr",
+        "@tsr-analysis",
+        "TSR analysis",
+        "Technical Support Report analysis",
+        "server log analysis",
+        "hardware failure diagnosis",
+        "deployment failure analysis"
+      ],
+      "capabilities": [
+        "TSR package structure analysis",
+        "Hardware state review",
+        "Lifecycle log analysis",
+        "Critical failure pattern detection",
+        "System comparison",
+        "Deployment failure diagnosis",
+        "I2C/VR communication failure detection"
+      ]
+    }
+  ],
+  "dependencies": {
+    "python": ">=3.8",
+    "packages": [
+      "redfish",
+      "argparse"
+    ],
+    "system_tools": [
+      "racadm",
+      "ffmpeg"
+    ]
+  },
+  "security_requirements": {
+    "credential_management": "Required - use secret_key inputs or environment variables",
+    "network_access": "Required - iDRAC connectivity",
+    "privileges": "Required - appropriate iDRAC user roles"
+  },
+  "integration_points": {
+    "dap_blueprints": "Supported - custom node types and scripts",
+    "monitoring_systems": "Supported - health check integration",
+    "automation_tools": "Supported - CI/CD and configuration management"
+  },
+  "documentation": {
+    "main_readme": "README.md",
+    "quick_start": "QUICKSTART.md",
+    "skill_docs": [
+      "idrac/SKILL.md",
+      "tsr-analysis/SKILL.md"
+    ]
+  },
+  "use_cases": [
+    "Hardware failure investigation",
+    "Deployment troubleshooting",
+    "System health monitoring",
+    "Firmware management",
+    "Configuration management",
+    "Post-mortem analysis"
+  ],
+  "best_practices": [
+    "Never hardcode credentials",
+    "Use secret_key inputs for DAP blueprints",
+    "Test in non-production first",
+    "Backup configurations before changes",
+    "Document all changes",
+    "Use automated workflows",
+    "Monitor system health proactively"
+  ]
+}

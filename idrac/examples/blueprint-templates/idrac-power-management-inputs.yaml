@@ -1,0 +1,90 @@
+inputs:
+  idrac_host:
+    type: string
+    display_label: iDRAC Host
+    description: IP address or hostname of the iDRAC interface
+    default: ""
+    hidden: false
+    allow_update: true
+    display:
+      group: idrac_connection
+    constraints:
+      - pattern: '^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[a-zA-Z0-9\-\.]+$'
+        error_message: Must be a valid IP address or hostname
+
+  idrac_username:
+    type: secret_key
+    display_label: iDRAC Username
+    description: Username for iDRAC authentication
+    hidden: false
+    display:
+      group: idrac_credentials
+
+  idrac_password:
+    type: secret_key
+    display_label: iDRAC Password
+    description: Password for iDRAC authentication
+    hidden: false
+    display:
+      group: idrac_credentials
+
+  connection_method:
+    type: string
+    display_label: Connection Method
+    description: Method to connect to iDRAC
+    default: redfish
+    hidden: false
+    allow_update: true
+    display:
+      group: idrac_connection
+    constraints:
+      - valid_values: [redfish, racadm, snmp]
+        error_message: Must be one of: redfish, racadm, snmp
+
+  power_operation:
+    type: string
+    display_label: Power Operation
+    description: Power operation to perform during create
+    default: status
+    hidden: false
+    allow_update: true
+    display:
+      group: power_settings
+    constraints:
+      - valid_values: [status, power_on, power_off, restart, graceful_shutdown]
+        error_message: Must be a valid power operation
+
+  force_shutdown:
+    type: boolean
+    display_label: Force Shutdown
+    description: Force power off during stop operation (ungraceful)
+    default: false
+    hidden: false
+    allow_update: true
+    display:
+      group: power_settings
+
+input_groups:
+  idrac_connection:
+    display_label: iDRAC Connection
+    index: 1
+    collapsible: true
+    inputs:
+      - idrac_host
+      - connection_method
+
+  idrac_credentials:
+    display_label: iDRAC Credentials
+    index: 2
+    collapsible: true
+    inputs:
+      - idrac_username
+      - idrac_password
+
+  power_settings:
+    display_label: Power Settings
+    index: 3
+    collapsible: true
+    inputs:
+      - power_operation
+      - force_shutdown

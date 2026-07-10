@@ -1,0 +1,24 @@
+capabilities:
+  power_state:
+    description: Current power state of the Dell server (On, Off, PoweringOn, PoweringOff)
+    value: { get_attribute: [ idrac_server, power_state ] }
+  
+  server_status:
+    description: Overall server status and health from iDRAC
+    value: { get_attribute: [ idrac_server, server_status ] }
+  
+  last_power_operation:
+    description: Last power operation performed and its result
+    value: { get_attribute: [ idrac_server, last_operation ] }
+  
+  idrac_version:
+    description: iDRAC firmware version
+    value: { get_attribute: [ idrac_server, idrac_version ] }
+  
+  service_tag:
+    description: Dell service tag for the server
+    value: { get_attribute: [ idrac_server, service_tag ] }
+  
+  model:
+    description: Server model information
+    value: { get_attribute: [ idrac_server, model ] }

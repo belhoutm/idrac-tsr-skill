@@ -1,0 +1,75 @@
+tosca_definitions_version: dell_1_1
+
+imports:
+  - dell/types/types.yaml
+  - plugin:ansible?version= >=2.9.0
+
+description: >
+  Dell iDRAC Power Management Blueprint - Manage Dell server power operations
+  via iDRAC Redfish API. Supports power on, power off, restart, and power state monitoring.
+
+node_templates:
+  idrac_server:
+    type: dell.nodes.SoftwareComponent
+    properties:
+      idrac_host: { get_input: idrac_host }
+      idrac_username: { get_secret: { get_input: idrac_username } }
+      idrac_password: { get_secret: { get_input: idrac_password } }
+      connection_method: { get_input: connection_method }
+      power_operation: { get_input: power_operation }
+    interfaces:
+      dell.interfaces.lifecycle:
+        create:
+          implementation: ansible.idrac_power_management.configure
+          inputs:
+            idrac_host: { get_property: [ SELF, idrac_host ] }
+            idrac_username: { get_secret: { get_input: idrac_username } }
+            idrac_password: { get_secret: { get_input: idrac_password } }
+            connection_method: { get_property: [ SELF, connection_method ] }
+            power_operation: { get_property: [ SELF, power_operation ] }
+        start:
+          implementation: ansible.idrac_power_management.power_on
+          inputs:
+            idrac_host: { get_property: [ SELF, idrac_host ] }
+            idrac_username: { get_secret: { get_input: idrac_username } }
+            idrac_password: { get_secret: { get_input: idrac_password } }
+        stop:
+          implementation: ansible.idrac_power_management.power_off
+          inputs:
+            idrac_host: { get_property: [ SELF, idrac_host ] }
+            idrac_username: { get_secret: { get_input: idrac_username } }
+            idrac_password: { get_secret: { get_input: idrac_password } }
+            force_shutdown: { get_input: force_shutdown }
+        delete:
+          implementation: ansible.idrac_power_management.cleanup
+          inputs:
+            idrac_host: { get_property: [ SELF, idrac_host ] }
+
+dsl_definitions:
+  idrac_connection_config: &idrac_connection_config
+    validate_certs: false
+    timeout: 30
+
+capabilities:
+  power_state:
+    description: Current power state of the server
+    value: { get_attribute: [ idrac_server, power_state ] }
+  server_status:
+    description: Overall server status from iDRAC
+    value: { get_attribute: [ idrac_server, status ] }
+
+labels:
+  csm_workflow:
+    values:
+      - server_management
+  server_type:
+    values:
+      - dell_poweredge
+
+blueprint_labels:
+  author:
+    values:
+      - infrastructure_team
+  category:
+    values:
+      - server_management

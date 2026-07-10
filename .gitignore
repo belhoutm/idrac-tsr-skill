@@ -1,0 +1,81 @@
+# Credentials and sensitive information
+*.key
+*.pem
+*.secret
+credentials.txt
+.env
+.env.local
+
+# TSR reports (large files, may contain sensitive info)
+TSR*.zip
+*.tsr
+tsr_reports/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Backup files
+*.bak
+*.backup
+
+# Test outputs
+test_results/
+coverage/
+.coverage
+htmlcov/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Node modules (if any frontend components)
+node_modules/
+
+# Build artifacts
+build/
+dist/
