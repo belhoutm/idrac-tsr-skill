@@ -116,20 +116,26 @@ racadm -r <server-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set BIOS.ProcSetting
 ```
 iDRAC-TSR-Skill/
 ├── README.md                    # This file
+├── QUICKSTART.md               # Quick start guide
+├── TRIGGER_GUIDE.md          # @ notation usage guide
+├── PROJECT_SUMMARY.md        # Project overview
+├── project-config.json       # Project configuration
 ├── idrac/                       # iDRAC management skill
 │   ├── SKILL.md                # Main skill documentation
+│   ├── README.md             # Skill-specific readme
 │   ├── references/             # Reference materials
-│   │   ├── redfish-api.md
-│   │   ├── racadm-cli.md
-│   │   ├── tsr-analysis.md
-│   │   ├── connection-methods.md
-│   │   └── security-best-practices.md
-│   └── examples/               # Example scripts and templates
-│       ├── blueprint-templates/
-│       ├── scripts/
-│       └── workflows/
-└── tsr-analysis/               # TSR analysis skill
-    └── SKILL.md                # Main skill documentation
+│   ├── examples/               # Example scripts and templates
+│   ├── scripts/              # Python scripts for iDRAC operations
+│   ├── patterns/             # Analysis patterns
+│   ├── known-issues/         # Known issues database
+│   └── idrac-architecture/    # Architecture documentation
+├── tsr-analysis/               # TSR analysis skill
+│   └── SKILL.md              # Main skill documentation
+└── security-audit/           # Security audit skill
+    ├── SKILL.md              # Main skill documentation
+    ├── references/           # Security patterns and remediation
+    ├── scripts/              # Security scanning scripts
+    └── patterns/             # Detection patterns
 ```
 
 ## Installation
@@ -159,6 +165,7 @@ Both skills support quick `@` trigger notation for faster invocation:
 
 - **@idrac** - Immediately invoke the idrac skill
 - **@tsr** - Immediately invoke the tsr-analysis skill
+- **@security-audit** - Immediately invoke the security-audit skill
 
 **Examples:**
 ```
@@ -166,6 +173,8 @@ Both skills support quick `@` trigger notation for faster invocation:
 "@tsr analyze TSR<ServiceTag>_timestamp.zip"
 "@idrac get system inventory"
 "@tsr check for hardware failures"
+"@security-audit scan for credentials"
+"@security-audit pre-commit check"
 ```
 
 ### Using the idrac Skill
@@ -193,6 +202,24 @@ Invoke the skill when analyzing TSR logs:
 "Analyze this TSR report for I2C communication failures"
 "Compare the TSR reports between working and failing systems"
 ```
+
+### Using the security-audit Skill
+
+Invoke the skill for security scanning and credential detection:
+
+```
+"@security-audit scan for credentials"
+"@security-audit pre-commit check"
+"@security-audit check for secrets"
+"@security-audit generate security report"
+```
+
+**Security Features:**
+- Pre-commit credential scanning
+- Secret and token detection
+- Comprehensive pattern matching
+- Remediation suggestions
+- Git hook integration
 
 ## Security Considerations
 
