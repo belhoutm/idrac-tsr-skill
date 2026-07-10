@@ -97,14 +97,18 @@ The two skills are designed to work together:
 
 ```bash
 # Step 1: Use idrac skill to collect TSR
-racadm -r <server-ip> -u root -p calvin techsupportreport
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+racadm -r <server-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupportreport
 
 # Step 2: Use tsr-analysis skill to analyze
 cd tsr-analysis
 python analyze_tsr.py TSR<ServiceTag>_<timestamp>.zip
 
 # Step 3: Use idrac skill to apply fixes
-racadm -r <server-ip> -u root -p calvin set BIOS.ProcSettings.LogicalProc Enable
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+racadm -r <server-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set BIOS.ProcSettings.LogicalProc Enable
 ```
 
 ## Project Structure

@@ -64,7 +64,9 @@ drwxr-xr-x  tsr-analysis/
 
 ```bash
 # Step 1: Collect TSR (using idrac)
-racadm -r 192.168.1.100 -u root -p calvin techsupportreport
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+racadm -r 192.168.1.100 -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupportreport
 
 # Step 2: Analyze TSR (using tsr-analysis)
 # Invoke: "@tsr analyze the collected TSR report"
@@ -126,11 +128,15 @@ export IDRAC_HOST="192.168.1.100"
 
 **Test iDRAC connectivity:**
 ```bash
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
 # Using racadm
-racadm -r 192.168.1.100 -u root -p calvin get system.hostname
+racadm -r 192.168.1.100 -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get system.hostname
 
 # Using Python/Redfish
-python3 -c "from redfish import RedfishClient; client = RedfishClient('192.168.1.100', 'root', 'calvin'); client.login(); print('Connected!')"
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+python3 -c "from redfish import RedfishClient; client = RedfishClient('192.168.1.100', '<YOUR_USERNAME>', '<YOUR_PASSWORD>'); client.login(); print('Connected!')"
 ```
 
 **Test TSR analysis:**
