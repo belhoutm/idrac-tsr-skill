@@ -256,10 +256,12 @@ class IDRACRedfishClient:
 def main():
     """Example usage"""
     # Initialize client
+    # SECURITY: Replace with your actual credentials
+    # Never commit real credentials to Git
     client = IDRACRedfishClient(
         host='192.168.1.100',
-        username='root',
-        password='calvin',
+        username='<YOUR_USERNAME>',
+        password='<YOUR_PASSWORD>',
         verify_ssl=False
     )
     

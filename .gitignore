@@ -5,6 +5,13 @@
 credentials.txt
 .env
 .env.local
+.env.*.local
+*.credentials
+*.token
+*password*
+*secret*
+idrac_config.json
+config_with_secrets.*
 
 # TSR reports (large files, may contain sensitive info)
 TSR*.zip

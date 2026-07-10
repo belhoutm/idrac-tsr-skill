@@ -1,5 +1,14 @@
 # TSR (Technical Support Report) Analysis Reference
 
+## ⚠️ SECURITY NOTICE
+
+**All credentials in this reference are placeholders and must be replaced with your actual credentials.**
+
+- Replace `<YOUR_USERNAME>` with your actual iDRAC username
+- Replace `<YOUR_PASSWORD>` with your actual iDRAC password
+- Never commit real credentials to Git
+- Use environment variables or secret management for production deployments
+
 This reference provides comprehensive information about analyzing Dell Technical Support Reports (TSR) for server diagnostics, error detection, and health analysis.
 
 ## Overview
@@ -47,10 +56,10 @@ tsr_report.zip
 
 ```bash
 # Generate TSR report
-racadm -r <idrac-ip> -u root -p calvin techsupreport export
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupreport export
 
 # Specify output location
-racadm -r <idrac-ip> -u root -p calvin techsupreport export -f /path/to/output.zip
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupreport export -f /path/to/output.zip
 ```
 
 ### Via Redfish API

@@ -1,5 +1,14 @@
 # iDRAC Workflow Guides
 
+## ⚠️ SECURITY NOTICE
+
+**All credentials in this guide are placeholders and must be replaced with your actual credentials.**
+
+- Replace `<YOUR_USERNAME>` with your actual iDRAC username
+- Replace `<YOUR_PASSWORD>` with your actual iDRAC password
+- Never commit real credentials to Git
+- Use environment variables or secret management for production deployments
+
 This guide provides step-by-step workflows for common iDRAC operations and TSR analysis tasks.
 
 ## Workflow 1: Initial Server Setup and Configuration
@@ -21,78 +30,80 @@ Set up a new Dell server with proper iDRAC configuration, network settings, and 
 ping <idrac-ip>
 
 # Test iDRAC access via racadm
-racadm -r <idrac-ip> -u root -p calvin get System.Model
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Model
 
 # Test Redfish API access
-curl -k -u root:calvin https://<idrac-ip>/redfish/v1/Systems
+curl -k -u <YOUR_USERNAME>:<YOUR_PASSWORD> https://<idrac-ip>/redfish/v1/Systems
 ```
 
 #### 1.2 Configure Network Settings
 ```bash
 # Set static IP address
-racadm -r <idrac-ip> -u root -p calvin set idrac.IPv4.Address 192.168.1.100
-racadm -r <idrac-ip> -u root -p calvin set idrac.IPv4.Netmask 255.255.255.0
-racadm -r <idrac-ip> -u root -p calvin set idrac.IPv4.Gateway 192.168.1.1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.IPv4.Address 192.168.1.100
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.IPv4.Netmask 255.255.255.0
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.IPv4.Gateway 192.168.1.1
 
 # Configure DNS
-racadm -r <idrac-ip> -u root -p calvin set idrac.Network.DNS1 192.168.1.10
-racadm -r <idrac-ip> -u root -p calvin set idrac.Network.DNS2 192.168.1.11
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Network.DNS1 192.168.1.10
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Network.DNS2 192.168.1.11
 
 # Configure NTP
-racadm -r <idrac-ip> -u root -p calvin set idrac.NTPConfigGroup.NTP1 192.168.1.10
-racadm -r <idrac-ip> -u root -p calvin set idrac.NTPConfigGroup.NTPEnable 1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.NTPConfigGroup.NTP1 192.168.1.10
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.NTPConfigGroup.NTPEnable 1
 ```
 
 #### 1.3 Configure Time Zone
 ```bash
 # Set time zone
-racadm -r <idrac-ip> -u root -p calvin set idrac.Time.TimeZone America/New_York
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Time.TimeZone America/New_York
 ```
 
 #### 1.4 Create User Accounts
 ```bash
 # Create admin user
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.2.UserName admin
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.2.Password secure_password
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.2.Enable 1
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.2.Privilege 0x000001ff
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.2.UserName admin
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.2.Password secure_password
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.2.Enable 1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.2.Privilege 0x000001ff
 
 # Create read-only user
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.3.UserName readonly
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.3.Password readonly_password
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.3.Enable 1
-racadm -r <idrac-ip> -u root -p calvin set idrac.Users.3.Privilege 0x00000001
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.3.UserName readonly
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.3.Password readonly_password
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.3.Enable 1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set idrac.Users.3.Privilege 0x00000001
 ```
 
 #### 1.5 Configure SSL Certificate
 ```bash
 # Generate CSR
-racadm -r <idrac-ip> -u root -p calvin sslcsr -g -f csr.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> sslcsr -g -f csr.txt
 
 # Submit CSR to CA and obtain certificate
 # Import signed certificate
-racadm -r <idrac-ip> -u root -p calvin sslcertupload -t 1 -f signed_certificate.crt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> sslcertupload -t 1 -f signed_certificate.crt
 ```
 
 #### 1.6 Initial Health Check
 ```bash
 # Get system information
-racadm -r <idrac-ip> -u root -p calvin get System
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System
 
 # Check component health
-racadm -r <idrac-ip> -u root -p calvin get System.Processor
-racadm -r <idrac-ip> -u root -p calvin get System.Memory
-racadm -r <idrac-ip> -u root -p calvin get Storage
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Processor
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Memory
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get Storage
 
 # Check system logs
-racadm -r <idrac-ip> -u root -p calvin getsel
-racadm -r <idrac-ip> -u root -p calvin getlclog
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> getsel
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> getlclog
 ```
 
 #### 1.7 Generate Baseline TSR
 ```bash
 # Generate initial TSR report
-racadm -r <idrac-ip> -u root -p calvin techsupreport export -f baseline_tsr.zip
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupreport export -f baseline_tsr.zip
 ```
 
 ### Verification Checklist
@@ -122,56 +133,56 @@ Update server firmware (BIOS, iDRAC, NIC, etc.) using best practices to minimize
 #### 2.1 Pre-Update Checks
 ```bash
 # Check current firmware versions
-racadm -r <idrac-ip> -u root -p calvin get System.Firmware
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Firmware
 
 # Check system health
-racadm -r <idrac-ip> -u root -p calvin get System.Power
-racadm -r <idrac-ip> -u root -p calvin get System.Temperature
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Power
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Temperature
 
 # Check for running jobs
-racadm -r <idrac-ip> -u root -p calvin jobqueue view
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> jobqueue view
 
 # Export current configuration
-racadm -r <idrac-ip> -u root -p calvin get -f pre_update_config.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get -f pre_update_config.txt
 ```
 
 #### 2.2 Schedule Maintenance Window
 ```bash
 # Schedule iDRAC firmware update
-racadm -r <idrac-ip> -u root -p calvin update -f idrac_firmware.exe -s "2024-01-15T02:00:00"
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> update -f idrac_firmware.exe -s "2024-01-15T02:00:00"
 
 # Schedule BIOS update
-racadm -r <idrac-ip> -u root -p calvin jobqueue create BIOS.Setup.1-1 -s "2024-01-15T02:30:00"
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> jobqueue create BIOS.Setup.1-1 -s "2024-01-15T02:30:00"
 ```
 
 #### 2.3 Monitor Update Progress
 ```bash
 # Monitor job queue
-watch -n 10 'racadm -r <idrac-ip> -u root -p calvin jobqueue view'
+watch -n 10 'racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> jobqueue view'
 
 # Check update status
-racadm -r <idrac-ip> -u root -p calvin jobqueue view <job-id>
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> jobqueue view <job-id>
 ```
 
 #### 2.4 Post-Update Verification
 ```bash
 # Verify firmware versions
-racadm -r <idrac-ip> -u root -p calvin get System.Firmware
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Firmware
 
 # Check system health
-racadm -r <idrac-ip> -u root -p calvin get System
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System
 
 # Check system logs for update-related entries
-racadm -r <idrac-ip> -u root -p calvin getsel
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> getsel
 
 # Generate post-update TSR
-racadm -r <idrac-ip> -u root -p calvin techsupreport export -f post_update_tsr.zip
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupreport export -f post_update_tsr.zip
 ```
 
 #### 2.5 Rollback Procedure (if needed)
 ```bash
 # If update fails, restore previous configuration
-racadm -r <idrac-ip> -u root -p calvin set -f pre_update_config.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set -f pre_update_config.txt
 
 # Revert firmware if necessary
 # (Requires specific firmware rollback procedure per Dell documentation)
@@ -204,80 +215,80 @@ Diagnose and resolve hardware issues using iDRAC tools and TSR analysis.
 #### 3.1 Generate TSR Report
 ```bash
 # Generate comprehensive TSR
-racadm -r <idrac-ip> -u root -p calvin techsupreport export -f troubleshooting_tsr.zip
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupreport export -f troubleshooting_tsr.zip
 ```
 
 #### 3.2 Analyze System Logs
 ```bash
 # Check System Event Log for errors
-racadm -r <idrac-ip> -u root -p calvin getsel -d
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> getsel -d
 
 # Check Lifecycle Controller logs
-racadm -r <idrac-ip> -u root -p calvin getlclog -d
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> getlclog -d
 
 # Filter for critical errors
-racadm -r <idrac-ip> -u root -p calvin getsel | grep -i critical
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> getsel | grep -i critical
 ```
 
 #### 3.3 Check Component Health
 ```bash
 # Check processor health
-racadm -r <idrac-ip> -u root -p calvin get System.Processor
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Processor
 
 # Check memory health
-racadm -r <idrac-ip> -u root -p calvin get System.Memory
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Memory
 
 # Check storage health
-racadm -r <idrac-ip> -u root -p calvin get Storage.RAID.Integrated.1-1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get Storage.RAID.Integrated.1-1
 
 # Check power supply status
-racadm -r <idrac-ip> -u root -p calvin get System.Power.Supply
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Power.Supply
 
 # Check temperature readings
-racadm -r <idrac-ip> -u root -p calvin get System.Temperature
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System.Temperature
 ```
 
 #### 3.4 Run Diagnostics
 ```bash
 # Run system diagnostics
-racadm -r <idrac-ip> -u root -p calvin diagnostics run
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> diagnostics run
 
 # Get diagnostic results
-racadm -r <idrac-ip> -u root -p calvin diagnostics results
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> diagnostics results
 ```
 
 #### 3.5 Identify Failed Components
 ```bash
 # Check for disabled components
-racadm -r <idrac-ip> -u root -p calvin get System | grep -i "Status=Disabled"
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System | grep -i "Status=Disabled"
 
 # Check for components with health issues
-racadm -r <idrac-ip> -u root -p calvin get System | grep -i "Health!=OK"
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System | grep -i "Health!=OK"
 ```
 
 #### 3.6 Implement Fixes
 ```bash
 # Example: Reset failed component
-racadm -r <idrac-ip> -u root -p calvin set System.Processor.CPU1.Reset 1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set System.Processor.CPU1.Reset 1
 
 # Example: Clear memory errors
-racadm -r <idrac-ip> -u root -p calvin set System.Memory.DIMM.Socket.A1.Reset 1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set System.Memory.DIMM.Socket.A1.Reset 1
 
 # Example: Reconfigure storage
-racadm -r <idrac-ip> -u root -p calvin storage deletevd VirtualDisk.0:RAID.Integrated.1-1
-racadm -r <idrac-ip> -u root -p calvin storage createvd -rl 1 -pdisklist <disk_list>
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> storage deletevd VirtualDisk.0:RAID.Integrated.1-1
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> storage createvd -rl 1 -pdisklist <disk_list>
 ```
 
 #### 3.7 Verify Resolution
 ```bash
 # Re-run diagnostics
-racadm -r <idrac-ip> -u root -p calvin diagnostics run
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> diagnostics run
 
 # Check component health
-racadm -r <idrac-ip> -u root -p calvin get System
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System
 
 # Generate post-fix TSR
-racadm -r <idrac-ip> -u root -p calvin techsupreport export -f post_fix_tsr.zip
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupreport export -f post_fix_tsr.zip
 ```
 
 ### Verification Checklist
@@ -469,31 +480,31 @@ Prepare servers for disaster recovery by backing up configurations and creating 
 #### 5.1 Configuration Backup
 ```bash
 # Backup complete iDRAC configuration
-racadm -r <idrac-ip> -u root -p calvin get -f backup_config.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get -f backup_config.txt
 
 # Backup BIOS configuration
-racadm -r <idrac-ip> -u root -p calvin get BIOS -f bios_backup.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get BIOS -f bios_backup.txt
 
 # Backup RAID configuration
-racadm -r <idrac-ip> -u root -p calvin get Storage -f storage_backup.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get Storage -f storage_backup.txt
 
 # Export SSL certificates
-racadm -r <idrac-ip> -u root -p calvin sslcertexport -f ssl_backup.cer
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> sslcertexport -f ssl_backup.cer
 ```
 
 #### 5.2 Generate Recovery TSR
 ```bash
 # Generate comprehensive TSR for recovery
-racadm -r <idrac-ip> -u root -p calvin techsupreport export -f recovery_tsr.zip
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> techsupreport export -f recovery_tsr.zip
 ```
 
 #### 5.3 Document Network Configuration
 ```bash
 # Export network configuration
-racadm -r <idrac-ip> -u root -p calvin get idrac.Network > network_config.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get idrac.Network > network_config.txt
 
 # Document VLAN settings
-racadm -r <idrac-ip> -u root -p calvin get NIC.VLAN > vlan_config.txt
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get NIC.VLAN > vlan_config.txt
 ```
 
 #### 5.4 Create Recovery Script
@@ -504,16 +515,16 @@ IDRAC_IP=$1
 BACKUP_DIR=$2
 
 # Restore iDRAC configuration
-racadm -r $IDRAC_IP -u root -p calvin set -f $BACKUP_DIR/backup_config.txt
+racadm -r $IDRAC_IP -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set -f $BACKUP_DIR/backup_config.txt
 
 # Restore BIOS configuration
-racadm -r $IDRAC_IP -u root -p calvin set BIOS -f $BACKUP_DIR/bios_backup.txt
+racadm -r $IDRAC_IP -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set BIOS -f $BACKUP_DIR/bios_backup.txt
 
 # Restore SSL certificate
-racadm -r $IDRAC_IP -u root -p calvin sslcertupload -t 1 -f $BACKUP_DIR/ssl_backup.cer
+racadm -r $IDRAC_IP -u <YOUR_USERNAME> -p <YOUR_PASSWORD> sslcertupload -t 1 -f $BACKUP_DIR/ssl_backup.cer
 
 # Verify configuration
-racadm -r $IDRAC_IP -u root -p calvin get System
+racadm -r $IDRAC_IP -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System
 ```
 
 #### 5.5 Test Recovery Procedure

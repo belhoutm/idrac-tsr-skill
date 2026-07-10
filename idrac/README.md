@@ -67,10 +67,12 @@ When you need to work with Dell iDRAC, simply mention iDRAC-related tasks:
 from scripts.idrac_redfish_client import IDRACRedfishClient
 
 # Initialize client
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
 client = IDRACRedfishClient(
     host='192.168.1.100',
-    username='root',
-    password='calvin',
+    username='<YOUR_USERNAME>',
+    password='<YOUR_PASSWORD>',
     verify_ssl=False
 )
 
@@ -89,13 +91,15 @@ client.restart_server()
 
 ```bash
 # Get system information
-racadm -r 192.168.1.100 -u root -p calvin get System
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+racadm -r 192.168.1.100 -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get System
 
 # Power on server
-racadm -r 192.168.1.100 -u root -p calvin serveraction powerup
+racadm -r 192.168.1.100 -u <YOUR_USERNAME> -p <YOUR_PASSWORD> serveraction powerup
 
 # Get system logs
-racadm -r 192.168.1.100 -u root -p calvin getsel
+racadm -r 192.168.1.100 -u <YOUR_USERNAME> -p <YOUR_PASSWORD> getsel
 ```
 
 ### 3. TSR Analysis

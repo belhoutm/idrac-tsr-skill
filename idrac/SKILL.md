@@ -47,10 +47,12 @@ Modern REST API for Dell PowerEdge servers. Supports all iDRAC features and is t
 from redfish import RedfishClient
 
 # Connection setup
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
 client = RedfishClient(
     host="idrac-ip-address",
-    username="root",
-    password="calvin",
+    username="<YOUR_USERNAME>",
+    password="<YOUR_PASSWORD>",
     default_prefix="/redfish/v1"
 )
 client.login()
@@ -62,7 +64,9 @@ Traditional command-line interface for iDRAC management. Works via SSH or local 
 **Setup:**
 ```bash
 # Remote execution
-racadm -r <idrac-ip> -u root -p calvin command
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> command
 
 # Local execution (on the server itself)
 racadm command
@@ -228,16 +232,18 @@ recommendations = report.get_recommendations()
 **Example (racadm):**
 ```bash
 # Backup current configuration
-racadm -r <idrac-ip> -u root -p calvin get
+# SECURITY: Replace with your actual credentials
+# Never commit real credentials to Git
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get
 
 # Set BIOS attribute
-racadm -r <idrac-ip> -u root -p calvin set BIOS.ProcSettings.LogicalProc Enable
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set BIOS.ProcSettings.LogicalProc Enable
 
 # Set network configuration
-racadm -r <idrac-ip> -u root -p calvin set NIC.1.IPv4Address 192.168.1.100
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> set NIC.1.IPv4Address 192.168.1.100
 
 # Verify configuration
-racadm -r <idrac-ip> -u root -p calvin get BIOS.ProcSettings.LogicalProc
+racadm -r <idrac-ip> -u <YOUR_USERNAME> -p <YOUR_PASSWORD> get BIOS.ProcSettings.LogicalProc
 ```
 
 ---
