@@ -363,15 +363,62 @@ Both skills integrate with DAP (Dell NativeEdge) blueprints:
 - Integrate with configuration management tools
 - Automate periodic TSR collection and analysis
 
+## Git Workflow
+
+This project follows a feature-branch workflow with small, testable commits. See [`.github/workflows/git-workflow-guide.md`](.github/workflows/git-workflow-guide.md) for detailed documentation.
+
+### Quick Start
+
+```bash
+# Create a new feature branch
+./scripts/git-helpers.sh new-feature add-nic-sensor
+
+# Make changes and commit
+./scripts/git-helpers.sh save "Add NIC sensor detection"
+
+# Push feature branch
+./scripts/git-helpers.sh push-feature
+
+# Create Pull Request on GitHub
+# ... (via GitHub UI)
+
+# Merge after approval
+./scripts/git-helpers.sh merge-feature
+```
+
+### Git Helper Script
+
+Use the helper script for common operations:
+
+```bash
+./scripts/git-helpers.sh new-feature <name>    # Create feature branch
+./scripts/git-helpers.sh new-fix <name>        # Create fix branch
+./scripts/git-helpers.sh save <message>        # Stage and commit
+./scripts/git-helpers.sh push-feature          # Push to origin
+./scripts/git-helpers.sh merge-feature         # Merge to master
+./scripts/git-helpers.sh cleanup               # Delete merged branches
+./scripts/git-helpers.sh status                # Show status
+./scripts/git-helpers.sh undo-last             # Undo last commit
+```
+
+### Pre-commit Hooks
+
+Pre-commit hooks automatically check for:
+- Hardcoded credentials (passwords, secrets, tokens)
+- Large files (>1MB)
+- Python syntax errors
+- YAML syntax issues
+
 ## Contributing
 
 When extending these skills:
 
-1. Maintain consistency with existing documentation
-2. Add security considerations for new operations
-3. Include examples for new functionality
-4. Update integration documentation
-5. Test thoroughly in non-production environments
+1. **Follow Git workflow**: Use feature branches and small commits
+2. **Test changes**: Verify functionality before committing
+3. **Security first**: Never hardcode credentials
+4. **Document changes**: Update relevant documentation
+5. **Maintain consistency**: Follow existing patterns
+6. **Add examples**: Include usage examples for new features
 
 ## Support
 
