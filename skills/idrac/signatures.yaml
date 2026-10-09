@@ -1,0 +1,200 @@
+---
+# iDRAC error signatures for deterministic pattern matching.
+# Match against racadm logs, Redfish log entries, and TSR XML.
+
+signatures:
+  - id: PSU_FAILURE
+    name: Power Supply Failure
+    severity: critical
+    component: power
+    keywords:
+      - power supply
+      - PSU
+      - power failure
+      - power supply redundancy lost
+    indicators:
+      - "Power supply failed"
+      - "PSU.*failed"
+      - "Power supply redundancy lost"
+    remediation:
+      - Check AC input and power cables.
+      - Reseat or replace the failed PSU.
+      - Verify system power redundancy.
+
+  - id: TEMP_CRITICAL
+    name: Critical Temperature
+    severity: critical
+    component: thermal
+    keywords:
+      - temperature
+      - thermal
+      - overheat
+      - critical temperature
+    indicators:
+      - "Critical temperature"
+      - "Temperature.*exceeded.*threshold"
+      - "Thermal shutdown"
+    remediation:
+      - Check ambient temperature and airflow.
+      - Verify fans are operational and unobstructed.
+      - Replace failed fans or reseat heatsinks.
+
+  - id: TEMP_WARNING
+    name: Temperature Warning
+    severity: warning
+    component: thermal
+    keywords:
+      - temperature warning
+      - high temperature
+    indicators:
+      - "Temperature warning"
+      - "Temperature threshold exceeded"
+    remediation:
+      - Monitor trends over time.
+      - Improve cooling or clean dust filters.
+
+  - id: FAN_SPEED_WARNING
+    name: Fan Speed Warning
+    severity: warning
+    component: thermal
+    keywords:
+      - fan
+      - fan speed
+      - rpm
+    indicators:
+      - "Fan speed outside"
+      - "Fan.*failed"
+    remediation:
+      - Check fan status and physical installation.
+      - Replace failed fans.
+
+  - id: MEMORY_ERROR
+    name: Memory Failure or ECC Error
+    severity: warning
+    component: memory
+    keywords:
+      - memory
+      - DIMM
+      - ECC
+      - uncorrectable
+    indicators:
+      - "Memory error"
+      - "DIMM.*failed"
+      - "Uncorrectable memory error"
+      - "ECC error"
+    remediation:
+      - Run memory diagnostics (ePSA/OSA).
+      - Identify the failing DIMM from the log.
+      - Reseat or replace the DIMM.
+
+  - id: CPU_ERROR
+    name: Processor Failure
+    severity: critical
+    component: cpu
+    keywords:
+      - processor
+      - CPU
+      - core
+    indicators:
+      - "CPU.*failed"
+      - "Processor.*internal error"
+      - "CPU configuration error"
+    remediation:
+      - Verify CPU installation and power.
+      - Check for bent pins or thermal paste issues.
+      - Replace CPU if health is failed.
+
+  - id: STORAGE_CONTROLLER_FAILURE
+    name: RAID/Storage Controller Failure
+    severity: critical
+    component: storage
+    keywords:
+      - RAID
+      - storage
+      - PERC
+      - virtual disk
+      - physical disk
+    indicators:
+      - "RAID controller.*failed"
+      - "Virtual disk.*failed"
+      - "Physical disk.*failed"
+      - "Storage.*degraded"
+    remediation:
+      - Check controller and disk status.
+      - Rebuild or replace failed disks.
+      - Verify backplane and cable connectivity.
+
+  - id: NIC_ERROR
+    name: Network Interface Failure
+    severity: warning
+    component: network
+    keywords:
+      - NIC
+      - ethernet
+      - network interface
+    indicators:
+      - "NIC.*failed"
+      - "Network.*link down"
+      - "Ethernet.*disabled"
+    remediation:
+      - Check cables and switch ports.
+      - Reseat or replace NIC/SFP.
+      - Verify VLAN and network configuration.
+
+  - id: FIRMWARE_UPDATE_FAILURE
+    name: Firmware Update Failure
+    severity: warning
+    component: firmware
+    keywords:
+      - firmware update
+      - update failed
+      - jobqueue
+    indicators:
+      - "Firmware update failed"
+      - "Job.*failed"
+      - "Update.*Exception"
+    remediation:
+      - Check job queue details.
+      - Verify firmware compatibility and prerequisites.
+      - Retry after clearing failed jobs.
+
+  - id: AUTHENTICATION_FAILURE
+    name: iDRAC Authentication Failure
+    severity: warning
+    component: idrac
+    keywords:
+      - authentication
+      - login
+      - unauthorized
+    indicators:
+      - "Authentication failed"
+      - "Login failed"
+      - "User account locked"
+    remediation:
+      - Verify credentials and user roles.
+      - Unlock or reset user account.
+      - Check iDRAC security policy and password expiry.
+
+  - id: I2C_VR_COMMUNICATION_FAILURE
+    name: I2C/VR Communication Failure
+    severity: critical
+    component: motherboard
+    keywords:
+      - I2C
+      - VR
+      - voltage regulator
+      - communication failure
+    indicators:
+      - "I2C_Master_Write_Read"
+      - "VR.*communication failure"
+      - "I2C.*failure"
+    remediation:
+      - Power-cycle the server and monitor for recurrence.
+      - Update BIOS and iDRAC firmware.
+      - If persistent, replace system board.
+
+# Scoring weights used for TSR health assessment.
+health_weights:
+  critical: 30
+  warning: 10
+  info: 0

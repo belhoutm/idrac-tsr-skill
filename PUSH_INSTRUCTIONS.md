@@ -127,17 +127,26 @@ iDRAC-TSR-Skill/
 ├── TRIGGER_GUIDE.md          # @ notation guide
 ├── PROJECT_SUMMARY.md        # Project summary
 ├── project-config.json       # Project configuration
-├── idrac/                    # iDRAC skill
+├── workflows/                 # Cross-skill orchestration workflows
+│   └── main.md               # Main troubleshooting workflow
+├── skills/idrac/                 # iDRAC skill
+│   ├── skill.md
 │   ├── SKILL.md
-│   ├── README.md
-│   ├── references/
+│   ├── workflow.md
+│   ├── signatures.yaml
+│   ├── examples.md
+│   ├── references.md
 │   ├── examples/
-│   ├── scripts/
-│   ├── patterns/
-│   ├── known-issues/
-│   └── idrac-architecture/
-└── tsr-analysis/             # TSR analysis skill
-    └── SKILL.md
+│   └── scripts/
+├── tsr-analysis/             # TSR analysis skill
+│   ├── skill.md
+│   └── SKILL.md
+└── security-audit/           # Security audit skill
+    ├── skill.md
+    ├── SKILL.md
+    ├── references/
+    ├── scripts/
+    └── patterns/
 ```
 
 ## Next Steps

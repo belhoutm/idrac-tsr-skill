@@ -38,7 +38,7 @@ This project contains two complementary skills for Dell PowerEdge server managem
 - Automated server provisioning
 - System monitoring and health checks
 
-**Documentation**: See `idrac/SKILL.md` for complete reference
+**Documentation**: See `skills/idrac/skill.md` for complete reference
 
 ### 2. tsr-analysis Skill
 
@@ -68,25 +68,34 @@ This project contains two complementary skills for Dell PowerEdge server managem
 - Configuration drift detection
 - Performance issue troubleshooting
 
-**Documentation**: See `tsr-analysis/SKILL.md` for complete reference
+**Documentation**: See `tsr-analysis/skill.md` for complete reference
 
 ## Integration Between Skills
 
-The two skills are designed to work together:
+The skills are designed to work together:
 
 ### Typical Workflow
 
-1. **Active Management** (idrac skill):
+1. **Orchestration** (`workflows/main.md`):
+   - Parse timestamps and analyze lifecycle logs
+   - Route to the right `skills/<subsystem>/skill.md`
+   - Correlate findings across subsystems
+
+2. **Active Management** (idrac skill):
    - Monitor server health via iDRAC
    - Collect TSR reports when issues are detected
    - Perform initial diagnostics
 
-2. **Deep Analysis** (tsr-analysis skill):
+3. **Deep Analysis** (tsr-analysis skill):
    - Analyze collected TSR reports
    - Identify root causes of failures
    - Compare with baseline configurations
 
-3. **Resolution** (idrac skill):
+4. **Security Audit** (security-audit skill):
+   - Scan code and artifacts for credentials or secrets
+   - Run before any Git operation
+
+5. **Resolution** (idrac skill):
    - Apply configuration fixes
    - Update firmware if needed
    - Verify resolution
@@ -120,19 +129,23 @@ iDRAC-TSR-Skill/
 ├── TRIGGER_GUIDE.md          # @ notation usage guide
 ├── PROJECT_SUMMARY.md        # Project overview
 ├── project-config.json       # Project configuration
-├── idrac/                       # iDRAC management skill
-│   ├── SKILL.md                # Main skill documentation
-│   ├── README.md             # Skill-specific readme
-│   ├── references/             # Reference materials
-│   ├── examples/               # Example scripts and templates
-│   ├── scripts/              # Python scripts for iDRAC operations
-│   ├── patterns/             # Analysis patterns
-│   ├── known-issues/         # Known issues database
-│   └── idrac-architecture/    # Architecture documentation
+├── workflows/                 # Cross-skill orchestration workflows
+│   └── main.md               # Main troubleshooting workflow
+├── skills/idrac/                 # iDRAC management skill
+│   ├── skill.md              # Main skill documentation
+│   ├── SKILL.md              # Symlink to skill.md for compatibility
+│   ├── workflow.md           # Step-by-step workflows
+│   ├── signatures.yaml       # Error signatures and health weights
+│   ├── examples.md           # Usage examples and snippets
+│   ├── references.md         # Command and endpoint reference
+│   ├── examples/             # Blueprint templates
+│   └── scripts/              # Python scripts for iDRAC operations
 ├── tsr-analysis/               # TSR analysis skill
-│   └── SKILL.md              # Main skill documentation
+│   ├── skill.md              # Main skill documentation
+│   └── SKILL.md              # Symlink to skill.md for compatibility
 └── security-audit/           # Security audit skill
-    ├── SKILL.md              # Main skill documentation
+    ├── skill.md              # Main skill documentation
+    ├── SKILL.md              # Symlink to skill.md for compatibility
     ├── references/           # Security patterns and remediation
     ├── scripts/              # Security scanning scripts
     └── patterns/             # Detection patterns

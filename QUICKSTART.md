@@ -11,8 +11,10 @@ ls -la
 
 Expected output:
 ```
-drwxr-xr-x  idrac/
+drwxr-xr-x  workflows/
+drwxr-xr-x  skills/idrac/
 drwxr-xr-x  tsr-analysis/
+drwxr-xr-x  security-audit/
 -rw-r--r--  README.md
 -rw-r--r--  QUICKSTART.md
 ```
@@ -151,8 +153,9 @@ unzip -l TSR<ServiceTag>_timestamp.zip
 ### 9. Getting Help
 
 For detailed information:
-- **idrac skill**: See `idrac/SKILL.md`
-- **tsr-analysis skill**: See `tsr-analysis/SKILL.md`
+- **idrac skill**: See `skills/idrac/skill.md`
+- **tsr-analysis skill**: See `tsr-analysis/skill.md`
+- **security-audit skill**: See `security-audit/skill.md`
 - **Full documentation**: See `README.md`
 
 ### 10. Next Steps

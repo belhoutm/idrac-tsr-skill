@@ -23,17 +23,26 @@ iDRAC-TSR-Skill/
 ├── PROJECT_SUMMARY.md         # This file
 ├── project-config.json        # Project configuration metadata
 ├── .gitignore                 # Git ignore rules
-├── idrac/                     # iDRAC management skill
-│   ├── SKILL.md              # Main skill documentation
-│   ├── README.md             # Skill-specific readme
-│   ├── references/           # Reference materials
-│   ├── examples/             # Example scripts and templates
-│   ├── scripts/              # Custom scripts
-│   ├── patterns/             # Analysis patterns
-│   ├── known-issues/         # Known issues database
-│   └── idrac-architecture/    # Architecture documentation
-└── tsr-analysis/             # TSR analysis skill
-    └── SKILL.md              # Main skill documentation
+├── workflows/                 # Cross-skill orchestration workflows
+│   └── main.md               # Main troubleshooting workflow
+├── skills/idrac/                 # iDRAC management skill
+│   ├── skill.md              # Main skill documentation
+│   ├── SKILL.md              # Symlink to skill.md for compatibility
+│   ├── workflow.md           # Step-by-step workflows
+│   ├── signatures.yaml       # Error signatures and health weights
+│   ├── examples.md           # Usage examples and snippets
+│   ├── references.md         # Command and endpoint reference
+│   ├── examples/             # Blueprint templates and scripts
+│   └── scripts/              # Custom Python scripts
+├── tsr-analysis/             # TSR analysis skill
+│   ├── skill.md              # Main skill documentation
+│   └── SKILL.md              # Symlink to skill.md for compatibility
+└── security-audit/           # Security audit skill
+    ├── skill.md              # Main skill documentation
+    ├── SKILL.md              # Symlink to skill.md for compatibility
+    ├── references/           # Security patterns and remediation
+    ├── scripts/              # Security scanning scripts
+    └── patterns/             # Detection patterns
 ```
 
 ## Key Features
@@ -101,13 +110,15 @@ iDRAC-TSR-Skill/
 - **project-config.json**: Project configuration and metadata
 
 ### Skill Documentation
-- **idrac/SKILL.md**: Complete iDRAC skill reference
-- **tsr-analysis/SKILL.md**: Complete TSR analysis skill reference
+- **skills/idrac/skill.md**: Complete iDRAC skill reference
+- **tsr-analysis/skill.md**: Complete TSR analysis skill reference
+- **security-audit/skill.md**: Complete security audit skill reference
 
 ### Additional Resources
-- **idrac/references/**: Detailed reference materials
-- **idrac/examples/**: Practical examples and templates
-- **idrac/known-issues/**: Known issues database
+- **skills/idrac/references.md**: Command and endpoint reference
+- **skills/idrac/examples.md**: Practical examples and snippets
+- **skills/idrac/signatures.yaml**: Error signatures and health weights
+- **workflows/main.md**: Cross-skill troubleshooting orchestration
 
 ## Quick Start
 

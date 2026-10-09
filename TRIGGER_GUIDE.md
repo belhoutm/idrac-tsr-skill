@@ -62,6 +62,20 @@ Both skills in this project support quick `@` trigger notation for immediate inv
 "@tsr review deployment timeline"
 ```
 
+### @security-audit Examples
+
+**Pre-commit Scan:**
+```
+"@security-audit scan staged files for secrets"
+"@security-audit check for credentials before commit"
+```
+
+**Credential Detection:**
+```
+"@security-audit find hardcoded passwords"
+"@security-audit scan for API keys"
+```
+
 **Comparison:**
 ```
 "@tsr compare TSR reports between system1 and system2"
@@ -139,10 +153,12 @@ You can combine @ notation with detailed instructions:
 |---------|-------|---------|
 | @idrac | idrac | Active server management and operations |
 | @tsr | tsr-analysis | TSR log analysis and diagnostics |
+| @security-audit | security-audit | Credential and secret scanning |
 | iDRAC | idrac | Traditional iDRAC skill invocation |
 | TSR analysis | tsr-analysis | Traditional TSR analysis invocation |
+| security audit | security-audit | Traditional security audit invocation |
 | Dell server | idrac | Server management tasks |
-| Technical Support Report | Both | Can invoke either skill based on context |
+| Technical Support Report | idrac / tsr-analysis | Can invoke either skill based on context |
 
 ## Advantages of @ Notation
 

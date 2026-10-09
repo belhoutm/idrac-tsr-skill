@@ -8,7 +8,7 @@
       "name": "idrac",
       "version": "1.0.0",
       "description": "Comprehensive iDRAC management and server operations",
-      "path": "idrac/",
+      "path": "skills/idrac/",
       "triggers": [
         "@idrac",
         "iDRAC",
@@ -57,6 +57,29 @@
         "Deployment failure diagnosis",
         "I2C/VR communication failure detection"
       ]
+    },
+    {
+      "name": "security-audit",
+      "version": "1.0.0",
+      "description": "Credential, secret, and sensitive information scanning",
+      "path": "security-audit/",
+      "triggers": [
+        "@security-audit",
+        "@security",
+        "security audit",
+        "credential scan",
+        "secret detection",
+        "check for credentials",
+        "find secrets",
+        "security check"
+      ],
+      "capabilities": [
+        "Credential scanning",
+        "Secret detection",
+        "Pattern matching",
+        "Pre-commit integration",
+        "Security audit reporting"
+      ]
     }
   ],
   "dependencies": {
@@ -84,8 +107,9 @@
     "main_readme": "README.md",
     "quick_start": "QUICKSTART.md",
     "skill_docs": [
-      "idrac/SKILL.md",
-      "tsr-analysis/SKILL.md"
+      "skills/idrac/skill.md",
+      "tsr-analysis/skill.md",
+      "security-audit/skill.md"
     ]
   },
   "use_cases": [
